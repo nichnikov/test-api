@@ -18,6 +18,7 @@ if __name__ == "__main__":
     texts_shingls = shinglorizer(texts)
     vectors = vectorizer(texts_shingls)
     searcher.add(ids, texts, vectors)
+    print("matrix.shape:", searcher.matrix.shape)
 
     """2) Поиск похожих текстов:"""
     searched_texts = ["учетная политика 2022", "что изменить в учетной политике на 2022 г",
@@ -25,6 +26,10 @@ if __name__ == "__main__":
 
     searched_shingls = shinglorizer(searched_texts)
     searched_vectors = vectorizer(searched_shingls)
-    result = searcher.search(vectors=searched_vectors,  score=0.7)
-    print(result)
+    search_result = searcher.search(vectors=searched_vectors,  score=0.95)
+    print("\nsearch result:", search_result)
+
+    """3) Удаление данных по id:"""
+    searcher.delete(ids)
+    print("\nmatrix:", searcher.matrix)
 
